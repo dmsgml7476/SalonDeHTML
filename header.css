@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    max-width: 1280px;
+}
+
+:root {
+    /* 벽자색 */
+    --main-color: #8C9ED9;
+    /* 설백색 */
+    --font-white: #E2E7E4;
+    /* 블랙 */
+    --font-black: #000000;
+    /* 청현색 */
+    --point-color: #566A8E;
+
+    /* 경고의 빨간색 */
+    --red-msg: rgb(247, 50, 50);
+
+    /* 버튼 */
+    --pink-backgroud: rgb(252, 222, 227);
+    --font: 
+}
+
+p {
+    color: var(--red-msg);
+}
+
+button {
+    background-color: rgb(252, 222, 227);
+    border: white;
+}
