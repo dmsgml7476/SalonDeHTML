@@ -86,16 +86,17 @@ margin-top: 20px;
   height: 500px;
   overflow: hidden;
   border: 1px solid sandybrown;
+
 }
 
 .main-map {
-    margin: 0 auto;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 650px;
   height: 450px;
-  background: #eee url('지도이미지.png') center/cover no-repeat; /* 실제 지도 또는 배경 */
+  background: #eee url('지도이미지.png') center/cover no-repeat;
   z-index: 0;
 }
 
