@@ -84,3 +84,12 @@
   display: flex;
   justify-content: left;
 }
+
+.shop-review-detail img{
+  width: 20px;
+  margin-right: 5px;
+}
+
+.shop-rating {
+  margin-right: 10px;
+}
