@@ -1,92 +1,89 @@
 :root {
-    /* 벽자색 */
-    --main-color: #8C9ED9;
-    /* 설백색 */
-    --font-white: #E2E7E4;
-    /* 청현색 */
-    --point-color: #566A8E;
+  /* 벽자색 */
+  --main-color: #8c9ed9;
+  /* 설백색 */
+  --font-white: #e2e7e4;
+  /* 청현색 */
+  --point-color: #566a8e;
 
-    /* 경고의 빨간색 */
-    --red-msg: rgb(247, 50, 50);
+  /* 경고의 빨간색 */
+  --red-msg: rgb(247, 50, 50);
 
-    --light-gray: rgb(231, 231, 231);
+  --light-gray: rgb(231, 231, 231);
 
-    /* 버튼 */
-    --pink-backgroud: rgb(252, 222, 227);
+  /* 버튼 */
+  --pink-backgroud: rgb(252, 222, 227);
 
-    /* 폰트 */
-    --font-pretendard: 'pretendard', sans-serif;
-    --font-noto-snas: 'Noto Sans KR', sans-serif;
-
-
+  /* 폰트 */
+  --font-pretendard: "pretendard", sans-serif;
+  --font-noto-snas: "Noto Sans KR", sans-serif;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid green;
 }
 
 /* 최상단 */
 .location-area {
-    margin: 30px auto 0 auto; 
-    border: 1px solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 900px;
+  margin: 30px auto 0 auto;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 900px;
 }
 
 .search-area {
-    width: 900px;
-    display: flex;
-    justify-content: left;
+  width: 900px;
+  display: flex;
+  justify-content: left;
 }
 
 .shop-search-box {
-    height: 50px;
-    width: 550px;
-    display: flex;
-    align-items: center;
-    border-radius: 50px;
-    background-color: var(--light-gray)
+  height: 50px;
+  width: 550px;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  background-color: var(--light-gray);
 }
 
 .search-icon > img {
-    width: 30px;
-    margin: 20px;
+  width: 30px;
+  margin: 20px;
 }
 
 .location-search-area {
-    margin-left: 20px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    border: 1px solid saddlebrown;
+  margin-left: 20px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border: 1px solid saddlebrown;
 }
 
-.location-icon > img{
-    width: 40px;
+.location-icon > img {
+  width: 40px;
 }
 
 .location-now {
-    font-size: 25px;
-    margin-left: 15px;
-    margin-bottom: 5px;
+  font-size: 25px;
+  margin-left: 15px;
+  margin-bottom: 5px;
 }
 
 /* 지도 부분 */
 
 .main-content-area {
-margin-top: 20px;
+  margin-top: 20px;
   position: relative;
   width: 1280px;
   height: 500px;
   overflow: hidden;
   border: 1px solid sandybrown;
-
 }
 
 .main-map {
@@ -96,7 +93,7 @@ margin-top: 20px;
   transform: translate(-50%, -50%);
   width: 650px;
   height: 450px;
-  background: #eee url('지도이미지.png') center/cover no-repeat;
+  background: #eee url("지도이미지.png") center/cover no-repeat;
   z-index: 0;
 }
 
@@ -145,4 +142,118 @@ margin-top: 20px;
 
 .split-box.open::after {
   transform: translateX(100%);
+}
+
+/* 광고 배너 */
+
+.ad-banner-swiper {
+  width: 1000px;
+  height: 180px;
+  margin: 20px 0;
+  padding: 0 40px; /* 좌우 미리보기 여백 */
+  box-sizing: border-box;
+}
+
+.swiper-slide {
+  background: #d3d3d3;
+  border-radius: 16px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  height: 80px;
+  line-height: 80px;
+}
+
+/* 샵 추천 타이틀 */
+
+.best-shops-area {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.best-shops-title-box {
+  display: flex;
+  justify-content: left;
+  font-size: 30px;
+}
+
+.best-shops-icon > img {
+  width: 40px;
+  margin-left: 15px;
+}
+
+/* 샵 리스트 */
+
+.shops-slide-box {
+  width: 1280px;
+  height: 350px;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shops-info-box {
+  max-width: 430px;
+  padding: 10px;
+  height: 380px;
+  border: 1px solid sandybrown;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.shop-img > img {
+  max-width: 400px;
+  clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  object-fit: cover;
+}
+
+.shop-info-title {
+  width: 365px;
+  border: 1px solid salmon;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-right: 50px;
+}
+
+.shop-info-detail {
+  display: flex;
+  width: 365px;
+  border: 1px solid salmon;
+  margin-top: 5px;
+  margin-right: 60px;
+}
+
+.shop-info-name {
+  font-size: 20px;
+}
+
+.rating-info-box {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.rating-info-box > img {
+  width: 20px;
+  margin-right: 5px;
+  height: 20px;
+}
+
+.reviews-info-box {
+  display: flex;
+  align-items: center;
+}
+
+.reviews-info-box > img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
