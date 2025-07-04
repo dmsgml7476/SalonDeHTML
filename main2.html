@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="header.css" />
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="main2.css" />
 
     <!-- Swiper CDN -->
     <link
@@ -35,34 +35,15 @@
 
         <div class="main-content-area">
           <div class="main-map">지도</div>
-          <div class="split-box" onclick="openSplit()"></div>
         </div>
-
-        <!-- <div class="ad-banner-area">
-                <div class="ad-banner-box">
-                    <img src="" alt="광고 배너1">
-                </div>
-                <div class="ad-banner-box">
-                    <img src="" alt="광고 배너2">
-                </div>
-                <div class="ad-banner-box">
-                    <img src="" alt="광고 배너3">
-                </div>
-                <div class="ad-banner-box">
-                    <img src="" alt="광고 배너4">
-                </div>
-                <div class="ad-banner-box">
-                    <img src="" alt="광고 배너5">
-                </div>
-            </div> -->
 
         <div class="swiper ad-banner-swiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide">배너 광고1</div>
-            <div class="swiper-slide">배너 광고2</div>
-            <div class="swiper-slide">배너 광고3</div>
-            <div class="swiper-slide">배너 광고4</div>
-            <div class="swiper-slide">배너 광고5</div>
+            <div class="swiper-slide ad-banner">배너 광고1</div>
+            <div class="swiper-slide ad-banner">배너 광고2</div>
+            <div class="swiper-slide ad-banner">배너 광고3</div>
+            <div class="swiper-slide ad-banner">배너 광고4</div>
+            <div class="swiper-slide ad-banner">배너 광고5</div>
           </div>
         </div>
 
@@ -291,13 +272,41 @@
       }
 
       new Swiper(".ad-banner-swiper", {
-        slidesPerView: 1.3, // 1개 + 양쪽 일부 보이게
-        spaceBetween: 30,
+        // 기본 설정 (가장 큰 화면)
+        slidesPerView: 1.3,
+        spaceBetween: 20,
         centeredSlides: true,
         loop: true,
         autoplay: {
           delay: 8000,
           disableOnInteraction: false,
+        },
+        // 반응형 설정
+        breakpoints: {
+          // 1280px 미만일 때
+          1280: {
+            slidesPerView: 1.3,
+            spaceBetween: 20,
+            centeredSlides: true,
+          },
+          // 1024px 미만일 때
+          1024: {
+            slidesPerView: 1.3, // 예시: 한 화면에 1개 슬라이드가 더 크게 보이도록 조정
+            spaceBetween: 15,
+            centeredSlides: true,
+          },
+          // 768px 미만일 때 (현재 CSS의 @media (max-width: 768px)와 유사)
+          768: {
+            slidesPerView: 1, // 한 화면에 1개 슬라이드만 보이도록
+            spaceBetween: 10,
+            centeredSlides: false, // 중앙 정렬 해제
+          },
+          // 480px 미만일 때
+          480: {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            centeredSlides: false,
+          },
         },
       });
 

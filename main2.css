@@ -1,0 +1,453 @@
+:root {
+  --main-color: #8c9ed9;
+  --font-white: #e2e7e4;
+  --point-color: #566a8e;
+  --red-msg: rgb(247, 50, 50);
+  --light-gray: rgb(231, 231, 231);
+  --pink-backgroud: rgb(252, 222, 227);
+  --font-pretendard: "pretendard", sans-serif;
+  --font-noto-snas: "Noto Sans KR", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-pretendard);
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.main-wrap {
+  width: 100%;
+  max-width: 1280px;
+  padding: 0 20px;
+}
+
+/* ===== 위치 영역 ===== */
+.location-area {
+  margin: 0 auto;
+  margin-top: 50px;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-area {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.shop-search-box {
+  flex: 1 1 300px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 50px;
+  background-color: var(--light-gray);
+  padding: 0 20px;
+}
+
+.search-icon img {
+  width: 30px;
+}
+
+.location-search-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.location-icon img {
+  width: 30px;
+}
+
+.location-now {
+  font-size: 20px;
+}
+
+/* ===== 메인 지도 영역 ===== */
+.main-content-area {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-map {
+  width: 750px;
+  height: 500px;
+  background: #eee url("지도이미지.png") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  z-index: 1;
+}
+
+/* ===== 배너 영역 ===== */
+/* .ad-banner-swiper {
+  width: 100%;
+  padding: 0 30px;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.ad-banner-swiper .swiper-slide {
+  background: #d3d3d3;
+  border-radius: 16px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+} */
+
+.ad-banner-swiper {
+  width: 100%;
+  max-width: 1280px;
+  height: 200px;
+  margin: 50px auto;
+  box-sizing: border-box;
+}
+
+.ad-banner-swiper .swiper-wrapper {
+  display: flex;
+  align-items: center;
+  height: 200px;
+}
+
+.ad-banner-swiper .swiper-slide {
+  background: #d3d3d3;
+  border-radius: 16px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+/* ===== 샵 추천 ===== */
+.best-shops-area {
+  margin: 100px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.best-shops-title-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.best-shops-icon img {
+  width: 30px;
+}
+
+.shopSwiper {
+  width: 100%;
+  overflow: visible;
+  padding: 0 20px;
+}
+
+.shop-slider {
+  display: flex;
+  gap: 16px;
+}
+
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  width: 360px !important;
+}
+
+.shop-content {
+  background: #f3f3f3;
+  transform: skew(-10deg);
+  padding: 16px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skew-box {
+  width: 100%;
+  height: 300px;
+  background: #ccc;
+  margin-bottom: 10px;
+}
+
+.shop-info {
+  text-align: center;
+}
+
+.shop-info-detail {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.shop-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.shop-distance {
+  font-size: 14px;
+  color: #666;
+}
+
+.shop-review-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.shop-review-detail img {
+  width: 20px;
+}
+
+.shop-rating,
+.shop-review-count {
+  font-size: 14px;
+}
+
+/* ===== 디자이너 추천 ===== */
+.best-designer-area {
+  margin: 100px 0;
+}
+
+.best-designer-title-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.best-designer-title-box img {
+  width: 30px;
+  transform: rotate(90deg);
+}
+
+.best-designer-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--light-gray);
+  border-radius: 15px;
+  padding: 40px;
+  gap: 20px;
+}
+
+.best-designer-list-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.best-designer-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 10px;
+}
+
+.designer-profile-box {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--light-gray);
+  margin-right: 20px;
+}
+
+.designer-info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.designer-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.designer-shop,
+.designer-specialty-tag {
+  font-size: 14px;
+  color: #777;
+}
+
+.designer-bubble {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bubble-content {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.review-img {
+  background: var(--light-gray);
+  height: 300px;
+}
+
+.review-info-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.review-rating-box {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+
+.review-rating-box img {
+  width: 20px;
+  margin-right: 8px;
+}
+
+.review-create-at {
+  font-size: 14px;
+  color: gray;
+}
+
+/* ===== 반응형 대응 ===== */
+@media (max-width: 1024px) {
+  .main-map {
+    width: 90%;
+    height: 450px;
+  }
+
+  .ad-banner-swiper {
+    width: 100%;
+  }
+
+  .swiper-slide {
+    width: 300px !important;
+  }
+
+  .shop-content {
+    height: 400px;
+  }
+
+  .best-designer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .review-img {
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .shop-search-box {
+    width: 100%;
+  }
+
+  .location-now {
+    font-size: 16px;
+  }
+
+  .shop-content {
+    height: 360px;
+  }
+
+  .swiper-slide {
+    width: 260px !important;
+  }
+
+  .review-img {
+    height: 200px;
+  }
+
+  .ad-banner-swiper {
+    padding: 0 16px;
+  }
+
+  .ad-banner-swiper .swiper-slide {
+    width: 100% !important;
+  }
+
+  .best-designer-title-box {
+    font-size: 22px;
+  }
+
+  .designer-name {
+    font-size: 18px;
+  }
+
+  .designer-profile-box {
+    width: 60px;
+    height: 60px;
+  }
+
+  .review-rating-box {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-content {
+    height: 320px;
+    padding: 12px;
+  }
+
+  .swiper-slide {
+    width: 220px !important;
+  }
+
+  .shop-name {
+    font-size: 16px;
+  }
+
+  .best-shops-title-box {
+    font-size: 20px;
+  }
+
+  .review-img {
+    height: 150px;
+  }
+
+  .review-rating-box {
+    font-size: 14px;
+  }
+}
