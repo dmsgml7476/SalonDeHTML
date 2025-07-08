@@ -155,6 +155,121 @@
                 </div>
               </div>
               <!-- 존재하는 예약만큼 반복 -->
+              <!-- 예약 완료된 경우 -->
+              <div class="my-reservation-box">
+                <div class="my-reservation-title">
+                  <div class="res-designer">
+                    <span class="designer-name">나미리 디자이너</span>
+                    <spna class="shop-name">(떡잎마을 미용실)</spna>
+                  </div>
+
+                  <div class="reservation-info-box">
+                    <div class="reservation-date">2025.05.20</div>
+                    <div class="reservation-time">12:30</div>
+                    <div class="service-name">커트</div>
+                  </div>
+
+                  <div class="reservation-status">예약완료</div>
+                </div>
+                <div class="my-reservation-details" style="display: none">
+                  <div class="price-details">
+                    <div class="service-price">
+                      <span>시술가격</span>
+                      <span>30000</span>
+                      <div class="coupon-icon-area"></div>
+                    </div>
+                    <div class="coupon-discount">
+                      <span>할인가격</span>
+                      <spna>-5000</spna>
+                      <div class="coupon-icon-area">
+                        <div class="coupon-container">
+                          <img
+                            src="/image/coupon.png"
+                            alt="쿠폰"
+                            class="coupon-img"
+                          />
+                          <div class="tooltip">
+                            <div>
+                              <strong>쿠폰이름</strong>
+                              <span class="tooltip-time">만료 3일전</span>
+                            </div>
+                            <div>
+                              <div>
+                                <strong>15%</strong>
+                              </div>
+                              <div class="tooltip-min">최소 금액 : 20,000</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ticket-used-amount">
+                      <span>사용금액</span>
+                      <span>-25000</span>
+                      <div class="coupon-icon-area">
+                        <div class="coupon-container">
+                          <img
+                            src="/image/coupon.png"
+                            alt="쿠폰"
+                            class="coupon-img"
+                          />
+                          <div class="tooltip">
+                            <div>
+                              <strong>000샵 정액권</strong>
+                              <div>100,000</div>
+                            </div>
+                            <div>
+                              <strong>현재 잔액</strong>
+                              <div>70,000</div>
+                            </div>
+                            <div>
+                              <strong>결제 예정액</strong>
+                              <div>-25,000</div>
+                            </div>
+
+                            <div></div>
+
+                            <div>
+                              <strong>예정 잔액</strong>
+                              <div>45,000</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="final-price">
+                      <span>지불 예정액</span>
+                      <span>0</span>
+                      <div class="coupon-icon-area">
+                        <img src="/image/coupon.png" alt="쿠폰" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="shop-info-details">
+                    <div class="address-box">
+                      <div class="address-title">주소</div>
+                      <div class="address">대전 광역시 대덕구 어쩌구저쩌구</div>
+                    </div>
+
+                    <div class="tel-box">
+                      <div class="tel-title">전화번호</div>
+                      <div class="tel">010-5482-5482</div>
+                    </div>
+                  </div>
+                  <div class="btn-box">
+                    <button class="reservation-change" href="">변경하기</button>
+                    <button class="re-reservation" href="">재예약하기</button>
+                    <button
+                      class="review-create"
+                      onclick="openCreateReviewModal()"
+                    >
+                      리뷰쓰기
+                    </button>
+                    <button class="review-show" href="">리뷰 보기</button>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="no-reserviation" style="display: none">
               예약 내역이 없습니다. 헤어샵에 예약을 해보세요!
