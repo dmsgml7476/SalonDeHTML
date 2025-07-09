@@ -69,11 +69,6 @@
   color: #fff;
 }
 
-/* 오타 수정: `claas` -> `class` */
-.my-page-menu .my-like-page {
-  /* 기본 스타일 */
-}
-
 /* --- 마이페이지 컨텐츠 영역 --- */
 .my-page-content-area {
   flex-grow: 1; /* 남은 공간 모두 차지 */
@@ -515,7 +510,10 @@
   padding: 14px 16px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 200px;
+  min-width: 200px;
+  max-width: 300px;
+  white-space: normal;
+  word-break: break-word;
   font-size: 14px;
   color: #000;
   z-index: 100;
@@ -605,6 +603,23 @@
 
   .my-reservation-list {
     height: 635px;
+  }
+
+  .coupon-icon-area {
+    grid-column: span 1;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rebeccapurple;
+  }
+
+  .coupon-icon-area img {
+    width: 20px;
+  }
+
+  .tooltip {
+    left: auto;
+    right: 110%;
+    transform: translateY(-50%);
   }
 
   .res-designer {
