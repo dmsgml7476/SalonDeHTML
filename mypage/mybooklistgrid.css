@@ -180,7 +180,7 @@
 /* --- 예약 상세 정보 (초기에는 숨김) --- */
 .my-reservation-details {
   padding: 20px;
-  display: none; /* JavaScript로 토글 */
+  display: none;
   border-top: 1px solid #eee; /* 상단 구분선 */
   background-color: #ffffff;
 }
@@ -204,6 +204,7 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
   border: 1px solid;
 }
 
@@ -213,6 +214,9 @@
 
 .coupon-icon-area {
   display: flex;
+  width: 100%;
+  height: auto;
+  align-items: center;
   margin-left: 10px;
 }
 
@@ -495,6 +499,7 @@
 
 /* 쿠폰정보 박스 */
 .coupon-container {
+  border: 1px solid red;
   position: relative;
   display: inline-block;
 }
@@ -605,6 +610,12 @@
 
   .my-reservation-list {
     height: 635px;
+  }
+
+  .coupon-icon-area {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
   }
 
   .res-designer {
