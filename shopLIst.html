@@ -9,21 +9,69 @@
   <body>
     <div class="shop-list-wrap">
       <div class="container">
-        <!-- 상단 검색 영역 -->
         <div class="top-bar">
-          <div class="location-area">
-            <div class="search-area">
-              <div class="shop-search-box">
+          <div class="header-content">
+            <div class="initial-display active">
+              <div class="shop-search-box" id="initialShopSearchBox">
                 <div class="search-icon">
                   <img src="image/search.png" alt="돋보기" />
                 </div>
+                <input
+                  type="text"
+                  class="shop-search-input"
+                  placeholder="미용실 검색"
+                  readonly
+                />
               </div>
 
-              <div class="location-search-area">
+              <div class="location-search-area" id="initialLocationSearchArea">
                 <div class="location-icon">
                   <img src="image/location.png" alt="위치아이콘" />
                 </div>
-                <div class="location-now">대전시 어쩌구</div>
+                <div class="location-now">대전 중구</div>
+              </div>
+            </div>
+
+            <div
+              class="shop-search-expanded-area hidden"
+              id="expandedShopSearchArea"
+            >
+              <div class="expanded-search-box-centered">
+                <div class="search-icon">
+                  <img src="image/search.png" alt="돋보기" />
+                </div>
+                <input
+                  type="text"
+                  class="shop-search-input-expanded"
+                  placeholder="검색어를 입력하세요"
+                  autofocus
+                />
+              </div>
+              <div class="shop-search-options">
+                <button class="close-search-mode-button">닫기</button>
+              </div>
+            </div>
+
+            <div
+              class="address-input-area hidden"
+              id="expandedAddressInputArea"
+            >
+              <div class="location-now-centered">
+                <div class="location-icon">
+                  <img src="image/location.png" alt="위치아이콘" />
+                </div>
+                <div class="location-now-text">현재 위치 선택</div>
+              </div>
+              <div class="address-search-box">
+                <input
+                  type="text"
+                  class="address-search-input"
+                  placeholder="주소를 검색하거나 입력하세요"
+                />
+                <button class="address-search-button">검색</button>
+              </div>
+              <div class="address-manual-input">
+                <button class="close-location-mode-button">닫기</button>
               </div>
             </div>
           </div>
@@ -132,6 +180,76 @@
         const walk = (x - startX) * 1.5; // 스크롤 속도 조절
         wrapper.scrollLeft = scrollLeft - walk;
       });
+
+      // 검색 인풋 / 위치 검색
+
+      const initialDisplay = document.querySelector(".initial-display");
+      const initialShopSearchBox = document.getElementById(
+        "initialShopSearchBox"
+      );
+      const initialLocationSearchArea = document.getElementById(
+        "initialLocationSearchArea"
+      );
+
+      const expandedShopSearchArea = document.getElementById(
+        "expandedShopSearchArea"
+      );
+      const expandedAddressInputArea = document.getElementById(
+        "expandedAddressInputArea"
+      );
+
+      const closeSearchModeButton = document.querySelector(
+        ".close-search-mode-button"
+      );
+      const closeLocationModeButton = document.querySelector(
+        ".close-location-mode-button"
+      );
+
+      // 상태 관리 함수
+      function setMode(mode) {
+        // 모든 모드 숨기기
+        initialDisplay.classList.add("hidden");
+        initialDisplay.classList.remove("active");
+        expandedShopSearchArea.classList.add("hidden");
+        expandedShopSearchArea.classList.remove("active");
+        expandedAddressInputArea.classList.add("hidden");
+        expandedAddressInputArea.classList.remove("active");
+
+        // 특정 모드 활성화
+        if (mode === "initial") {
+          initialDisplay.classList.remove("hidden");
+          initialDisplay.classList.add("active");
+        } else if (mode === "search") {
+          expandedShopSearchArea.classList.remove("hidden");
+          expandedShopSearchArea.classList.add("active");
+          const searchInput = expandedShopSearchArea.querySelector(
+            ".shop-search-input-expanded"
+          );
+          if (searchInput) {
+            searchInput.focus(); // 포커스 설정
+          }
+        } else if (mode === "location") {
+          expandedAddressInputArea.classList.remove("hidden");
+          expandedAddressInputArea.classList.add("active");
+          const addressInput = expandedAddressInputArea.querySelector(
+            ".address-search-input"
+          );
+          if (addressInput) {
+            addressInput.focus(); // 포커스 설정
+          }
+        }
+      }
+
+      // 이벤트 리스너 연결
+      initialShopSearchBox.addEventListener("click", () => setMode("search"));
+      initialLocationSearchArea.addEventListener("click", () =>
+        setMode("location")
+      );
+
+      closeSearchModeButton.addEventListener("click", () => setMode("initial"));
+      closeLocationModeButton.addEventListener("click", () =>
+        setMode("initial")
+      );
     </script>
   </body>
 </html>

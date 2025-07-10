@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .couponSelect p {
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #555;
+      }
+      .coupon-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-self: flex-start;
+        align-items: center;
+        gap: 16px;
+      }
+      .coupon-item {
+        margin: 0 auto;
+        width: 300px;
+        max-width: 500px;
+        background-color: #f0f1f5;
+        border-radius: 10px;
+        padding: 12px 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-height: 180px;
+        position: relative;
+      }
+      .coupon-left {
+        width: calc(100% - 70px);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .coupon-amount {
+        font-size: 18px;
+        font-weight: bold;
+        color: #000;
+      }
+      .coupon-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #000;
+      }
+      .coupon-desc,
+      .coupon-min,
+      .coupon-exp {
+        font-size: 13px;
+        color: #555;
+      }
+      .coupon-item button {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        background: none;
+        border: none;
+        color: #566a8e;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .coupon-item button:hover {
+        background: none;
+        border: none;
+        color: #42516d;
+      }
+      #applied-discount {
+        font-size: 18px;
+        color: #000;
+        margin-top: 12px;
+      }
+
+      /* 정액권 선택 섹션 */
+      .ticketselect {
+        max-width: 1280px;
+        margin: 40px auto;
+        font-family: "Pretendard", "Noto Sans KR", sans-serif;
+      }
+      .ticketselect h2 {
+        font-size: 22px;
+        margin-bottom: 8px;
+      }
+      .ticket-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: flex-start;
+      }
+      .ticket-item {
+        width: 300px;
+        padding: 16px 12px;
+        border-radius: 10px;
+        background-color: #f0f1f5;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 140px;
+      }
+      .ticket-left {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .ticket-amount {
+        font-size: 18px;
+        font-weight: bold;
+        color: #000;
+      }
+      .ticket-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+      }
+      .ticket-item button {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        background: none;
+        border: none;
+        font-size: 16px;
+        color: #566a8e;
+        cursor: pointer;
+        padding: 0;
+      }
+      .ticket-item button:hover {
+        background: none;
+        border: none;
+        color: #42516d;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 쿠폰 선택 섹션 -->
+    <section class="couponSelect" id="couponSelect">
+      <div class="coupon-list">
+        <!-- 쿠폰 1 -->
+        <div class="coupon-item">
+          <div class="coupon-left">
+            <div class="coupon-amount">10% 할인</div>
+            <div class="coupon-title">생일 쿠폰</div>
+            <div class="coupon-desc">생일 축하 특별 할인</div>
+            <div class="coupon-min">20,000원 이상 사용 가능</div>
+            <div class="coupon-exp">사용 기한: 2025-07-18</div>
+          </div>
+          <button onclick="applyCoupon('coupon1')">사용하기</button>
+        </div>
+
+        <!-- 쿠폰 2 -->
+        <div class="coupon-item">
+          <div class="coupon-left">
+            <div class="coupon-amount">5,000원 할인</div>
+            <div class="coupon-title">첫 방문 쿠폰</div>
+            <div class="coupon-desc">첫 방문 고객을 위한 특별 혜택</div>
+            <div class="coupon-min">15,000원 이상 사용 가능</div>
+            <div class="coupon-exp">사용 기한: 2025-07-18</div>
+          </div>
+          <button onclick="applyCoupon('coupon2')">사용하기</button>
+        </div>
+      </div>
+      <p>
+        <strong>할인 적용금액 :</strong>
+        <span id="applied-discount">총 원 할인</span>
+      </p>
+    </section>
+
+    <!-- 정액권 선택 섹션 -->
+    <section class="ticketselect" id="ticketSelect">
+      <h2>정액권 선택</h2>
+      <div class="ticket-list">
+        <!-- 정액권 1 -->
+        <div class="ticket-item">
+          <div class="ticket-left">
+            <div class="ticket-amount">50,000원</div>
+            <div class="ticket-title">[Salon De DW] 5만원 정액권</div>
+          </div>
+          <button onclick="applyTicket('ticket1')">사용하기</button>
+        </div>
+
+        <!-- 정액권 2 -->
+        <div class="ticket-item">
+          <div class="ticket-left">
+            <div class="ticket-amount">200,000원</div>
+            <div class="ticket-title">[Salon De DW] vip 20만원 정액권</div>
+          </div>
+          <button onclick="applyTicket('ticket2')">사용하기</button>
+        </div>
+      </div>
+
+      <p id="ticket-price" style="font-size: 16px; margin-top: 12px">
+        정액권 적용 금액: 원
+      </p>
+    </section>
+
+    <script>
+      // 쿠폰 선택 섹션
+
+      // 샘플 쿠폰 데이터
+      //   const coupons = [
+      //     {
+      //       id: "coupon1",
+      //       title: "생일 쿠폰",
+      //       description: "생일 축하 특별 할인",
+      //       discountType: "percent",
+      //       value: 10,
+      //       minAmount: 20000,
+      //       expire: "2025-07-18",
+      //       issuedAt: "2025-06-01",
+      //       salonId: "salon001",
+      //       userOwns: true,
+      //       usable: true,
+      //     },
+      //     {
+      //       id: "coupon2",
+      //       title: "첫 방문 쿠폰",
+      //       description: "첫 방문 고객을 위한 특별 혜택",
+      //       discountType: "amount",
+      //       value: 5000,
+      //       minAmount: 15000,
+      //       expire: "2025-07-18",
+      //       issuedAt: "2025-06-15",
+      //       salonId: "salon001",
+      //       userOwns: true,
+      //       usable: true,
+      //     },
+      //   ];
+
+      //   // 조건 필터 및 쿠폰 렌더링
+      //   function loadCoupons(sortBy = "issuedAt") {
+      //     const couponList = document.querySelector(".coupon-list");
+      //     couponList.innerHTML = ""; // 초기화
+
+      //     const today = new Date();
+      //     const salonId = "salon001";
+
+      //     let validCoupons = coupons.filter(
+      //       (c) =>
+      //         c.userOwns &&
+      //         c.salonId === salonId &&
+      //         new Date(c.expire) >= today &&
+      //         c.usable
+      //     );
+
+      //     // 정렬
+      //     if (sortBy === "percent") {
+      //       validCoupons.sort(
+      //         (a, b) =>
+      //           (b.discountType === "percent" ? b.value : 0) -
+      //           (a.discountType === "percent" ? a.value : 0)
+      //       );
+      //     } else if (sortBy === "amount") {
+      //       validCoupons.sort(
+      //         (a, b) =>
+      //           (b.discountType === "amount" ? b.value : 0) -
+      //           (a.discountType === "amount" ? a.value : 0)
+      //       );
+      //     } else if (sortBy === "expire") {
+      //       validCoupons.sort((a, b) => new Date(a.expire) - new Date(b.expire));
+      //     } else {
+      //       validCoupons.sort(
+      //         (a, b) => new Date(b.issuedAt) - new Date(a.issuedAt)
+      //       );
+      //     }
+
+      //     document.querySelector(
+      //       ".couponSelect span"
+      //     ).textContent = `${validCoupons.length}개`;
+
+      //     if (validCoupons.length === 0) {
+      //       couponList.innerHTML = `<p style="font-size:12px; color:#888;">사용 가능한 쿠폰이 없습니다.</p>`;
+      //       return;
+      //     }
+
+      //     validCoupons.forEach((coupon) => {
+      //       const div = document.createElement("div");
+      //       div.className = "coupon-item";
+      //       div.innerHTML = `
+      //   <div class="coupon-left">
+      //     <div class="coupon-amount">
+      //       ${
+      //         coupon.discountType === "percent"
+      //           ? `${coupon.value}% 할인`
+      //           : `${coupon.value.toLocaleString()}원 할인`
+      //       }
+      //     </div>
+      //     <div class="coupon-title">${coupon.title}</div>
+      //     <div class="coupon-desc">${coupon.description}</div>
+      //     <div class="coupon-min">${coupon.minAmount.toLocaleString()}원 이상 사용 가능</div>
+      //     <div class="coupon-exp">사용 기한: ${coupon.expire}</div>
+      //   </div>
+      //   <button onclick="applyCoupon('${coupon.id}')">사용하기</button>
+      // `;
+      //       couponList.appendChild(div);
+      //     });
+      //   }
+
+      //   // 쿠폰 할인율, 할인금액 적용
+      //   let selectedCouponId = null;
+
+      //   function applyCoupon(couponId) {
+      //     const allCoupons = document.querySelectorAll(".coupon-item");
+      //     const discountDisplay = document.getElementById("applied-discount");
+
+      //     // 선택 취소
+      //     if (selectedCouponId === couponId) {
+      //       selectedCouponId = null;
+      //       appliedDiscount.coupon = 0;
+
+      //       allCoupons.forEach((item) => {
+      //         const button = item.querySelector("button");
+      //         button.disabled = false;
+      //         button.style.opacity = "1";
+      //         button.style.pointerEvents = "auto";
+      //       });
+
+      //       if (discountDisplay) discountDisplay.textContent = "총 원 할인";
+      //       updateFinalPrice();
+      //       return;
+      //     }
+
+      //     // ✅ 선택 적용
+      //     selectedCouponId = couponId;
+
+      //     allCoupons.forEach((item) => {
+      //       const button = item.querySelector("button");
+      //       if (button.getAttribute("onclick").includes(couponId)) {
+      //         button.disabled = false;
+      //         button.style.opacity = "1";
+      //         button.style.pointerEvents = "auto";
+      //       } else {
+      //         button.disabled = true;
+      //         button.style.opacity = "0.4";
+      //         button.style.pointerEvents = "none";
+      //       }
+      //     });
+
+      //     const coupon = coupons.find((c) => c.id === couponId);
+      //     let couponDiscount = 0;
+      //     let displayText = "";
+
+      //     if (coupon) {
+      //       if (coupon.discountType === "percent") {
+      //         couponDiscount = Math.floor(originalPrice * (coupon.value / 100));
+      //         displayText = `${coupon.value}%`;
+      //       } else {
+      //         couponDiscount = coupon.value;
+      //         displayText = `${coupon.value.toLocaleString()}원`;
+      //       }
+
+      //       appliedDiscount.coupon = couponDiscount;
+
+      //       if (discountDisplay)
+      //         discountDisplay.textContent = `총 ${displayText} 할인`;
+      //     }
+
+      //     updateFinalPrice();
+      //   }
+
+      //   // 정렬 버튼 연결
+      //   function setupCouponFilters() {
+      //     const buttons = document.querySelectorAll(".filter-options button");
+      //     buttons.forEach((btn) => {
+      //       btn.addEventListener("click", () => {
+      //         loadCoupons(btn.dataset.sort);
+      //       });
+      //     });
+      //   }
+
+      //   // 실행
+      //   document.addEventListener("DOMContentLoaded", () => {
+      //     loadCoupons();
+      //     setupCouponFilters();
+      //   });
+
+      //   // 정액권 선택 & 예약 하기 버튼 섹션
+
+      //   const salonId = "salon001";
+      //   const originalPrice = 58000; // 시술 기본 금액
+      //   const appliedDiscount = {
+      //     coupon: 0,
+      //     ticket: 0,
+      //   };
+
+      //   // 정액권 렌더링
+
+      //   let selectedTicketId = null;
+
+      //   function applyTicket(ticketId) {
+      //     const allButtons = document.querySelectorAll(".ticket-item button");
+      //     const ticketButton = [...allButtons].find((btn) =>
+      //       btn.getAttribute("onclick").includes(ticketId)
+      //     );
+      //     const ticketItem = ticketButton.closest(".ticket-item");
+      //     const ticketPriceDisplay = document.getElementById("ticket-price");
+
+      //     const amountText =
+      //       ticketItem.querySelector(".ticket-amount").textContent;
+      //     const discountAmount = parseInt(amountText.replace(/[^0-9]/g, ""), 10);
+
+      //     if (selectedTicketId === ticketId) {
+      //       selectedTicketId = null;
+      //       appliedDiscount.ticket = 0;
+
+      //       allButtons.forEach((btn) => {
+      //         btn.disabled = false;
+      //         btn.style.opacity = "1";
+      //         btn.style.pointerEvents = "auto";
+      //       });
+
+      //       if (ticketPriceDisplay)
+      //         ticketPriceDisplay.textContent = "정액권 적용 금액: 원";
+      //     } else {
+      //       selectedTicketId = ticketId;
+      //       appliedDiscount.ticket = discountAmount;
+
+      //       allButtons.forEach((btn) => {
+      //         if (btn === ticketButton) {
+      //           btn.disabled = false;
+      //           btn.style.opacity = "1";
+      //         } else {
+      //           btn.disabled = true;
+      //           btn.style.opacity = "0.4";
+      //           btn.style.pointerEvents = "none";
+      //         }
+      //       });
+
+      //       if (ticketPriceDisplay)
+      //         ticketPriceDisplay.textContent = `정액권 적용 금액: ${discountAmount.toLocaleString()}원`;
+      //     }
+
+      //     updateFinalPrice();
+      //   }
+    </script>
+  </body>
+</html>
