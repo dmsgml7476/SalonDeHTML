@@ -97,78 +97,84 @@ body {
 }
 
 /* 지도 부분 */
+
 .main-content-area {
-  margin-top: 30px; /* 마진 조절 */
   position: relative;
-  width: 100%; /* 반응형 */
-  height: 450px; /* 높이 조절 */
-  overflow: hidden;
-  border-radius: 15px; /* 모서리 둥글게 */
-  box-shadow: 0 4px 10px var(--box-shadow); /* 그림자 추가 */
-}
-
-.main-map {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%; /* 반응형 */
-  height: 100%; /* 반응형 */
-  background: #eee url("지도이미지.png") center/cover no-repeat; /* 이미지 경로 확인 */
-  z-index: 0;
-  opacity: 0; /* 초기에는 숨김 */
-  transition: opacity 0.4s ease; /* 서서히 나타나도록 */
-}
-
-.main-map.show {
-  opacity: 1;
-}
-
-/* 하나의 split-box가 화면 덮음 */
-.split-box {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
+  max-width: 1280px; /* 원본보다 커지지 않게 */
+  margin: 30px auto 0;
+  overflow: hidden;
+  box-shadow: 0 4px 10px var(--box-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content-area .main-map {
+  position: absolute;
+
+  width: 80%;
+  height: 80%;
+  background-color: gray;
+  z-index: -1; /* 이미지 위에 겹친다면 조절 */
+}
+
+.main-content-area > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* 스플릿 */
+
+.split-overlay {
+  position: absolute;
+  inset: 0; /* 부모 전체 덮기 */
+  cursor: pointer;
   pointer-events: auto;
   z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--dark-gray);
-  overflow: hidden;
-  cursor: pointer; /* 클릭 가능 표시 */
 }
 
-/* 좌우 가상 요소 */
-.split-box::before,
-.split-box::after {
+img.sizer {
+  width: 100%;
+  height: auto;
+  visibility: hidden; /* ← 화면에선 투명, 공간은 유지 */
+  pointer-events: none; /* 혹시 모를 클릭 차단 */
+}
+
+/* 가상 요소 두 장으로 좌·우 절반을 만듦 */
+.split-overlay::before,
+.split-overlay::after {
   content: "";
   position: absolute;
   top: 0;
   width: 50%;
   height: 100%;
-  background-color: white; /* 배경색 변경 */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   transition: transform 0.7s ease;
-  z-index: 1;
 }
 
-.split-box::before {
+/* 왼쪽 절반 */
+.split-overlay::before {
   left: 0;
+  /* background-image 는 JS로 주입 */
+  background-position: left center;
 }
 
-.split-box::after {
+/* 오른쪽 절반 */
+.split-overlay::after {
   right: 0;
+  background-position: right center;
 }
 
-.split-box.open::before {
+/* ―― 열릴 때 애니메이션 ――――――――――― */
+.split-overlay.open::before {
   transform: translateX(-100%);
 }
-
-.split-box.open::after {
+.split-overlay.open::after {
   transform: translateX(100%);
 }
 
@@ -514,7 +520,7 @@ body {
   }
 
   .main-content-area {
-    height: 400px;
+    height: auto; /* 이미지가 알아서 비율 유지 */
   }
 
   .ad-banner-swiper {
@@ -604,12 +610,12 @@ body {
   }
 
   .main-content-area {
-    height: 300px;
     margin-top: 20px;
+    border-radius: 10px;
   }
 
-  .split-box {
-    font-size: 20px;
+  .main-content-area > img {
+    max-height: 300px;
   }
 
   .ad-banner-swiper {

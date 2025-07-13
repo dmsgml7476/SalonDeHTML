@@ -22,6 +22,7 @@
                   placeholder="미용실 검색"
                   readonly
                 />
+                <ul class="shop-suggestion-list"></ul>
               </div>
 
               <div class="location-search-area" id="initialLocationSearchArea">
@@ -52,6 +53,7 @@
               </div>
             </div>
 
+            <!-- 검색창 시작 -->
             <div
               class="address-input-area hidden"
               id="expandedAddressInputArea"
@@ -62,18 +64,20 @@
                 </div>
                 <div class="location-now-text">현재 위치 선택</div>
               </div>
-              <div class="address-search-box">
+              <div class="address-search-box" style="position: relative">
                 <input
                   type="text"
                   class="address-search-input"
                   placeholder="주소를 검색하거나 입력하세요"
                 />
-                <button class="address-search-button">검색</button>
+                <ul class="address-suggestion-list"></ul>
               </div>
               <div class="address-manual-input">
                 <button class="close-location-mode-button">닫기</button>
               </div>
             </div>
+
+            <!-- 검색창 -->
           </div>
         </div>
 
@@ -156,33 +160,32 @@
       let startX;
       let scrollLeft;
 
-      wrapper.addEventListener("mousedown", (e) => {
+      wrapper?.addEventListener("mousedown", (e) => {
         isDown = true;
         wrapper.classList.add("dragging");
         startX = e.pageX - wrapper.offsetLeft;
         scrollLeft = wrapper.scrollLeft;
       });
 
-      wrapper.addEventListener("mouseleave", () => {
+      wrapper?.addEventListener("mouseleave", () => {
         isDown = false;
         wrapper.classList.remove("dragging");
       });
 
-      wrapper.addEventListener("mouseup", () => {
+      wrapper?.addEventListener("mouseup", () => {
         isDown = false;
         wrapper.classList.remove("dragging");
       });
 
-      wrapper.addEventListener("mousemove", (e) => {
+      wrapper?.addEventListener("mousemove", (e) => {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - wrapper.offsetLeft;
-        const walk = (x - startX) * 1.5; // 스크롤 속도 조절
+        const walk = (x - startX) * 1.5;
         wrapper.scrollLeft = scrollLeft - walk;
       });
 
-      // 검색 인풋 / 위치 검색
-
+      // 모드 전환
       const initialDisplay = document.querySelector(".initial-display");
       const initialShopSearchBox = document.getElementById(
         "initialShopSearchBox"
@@ -190,14 +193,12 @@
       const initialLocationSearchArea = document.getElementById(
         "initialLocationSearchArea"
       );
-
       const expandedShopSearchArea = document.getElementById(
         "expandedShopSearchArea"
       );
       const expandedAddressInputArea = document.getElementById(
         "expandedAddressInputArea"
       );
-
       const closeSearchModeButton = document.querySelector(
         ".close-search-mode-button"
       );
@@ -205,51 +206,161 @@
         ".close-location-mode-button"
       );
 
-      // 상태 관리 함수
       function setMode(mode) {
-        // 모든 모드 숨기기
         initialDisplay.classList.add("hidden");
-        initialDisplay.classList.remove("active");
         expandedShopSearchArea.classList.add("hidden");
-        expandedShopSearchArea.classList.remove("active");
         expandedAddressInputArea.classList.add("hidden");
-        expandedAddressInputArea.classList.remove("active");
 
-        // 특정 모드 활성화
         if (mode === "initial") {
           initialDisplay.classList.remove("hidden");
-          initialDisplay.classList.add("active");
         } else if (mode === "search") {
           expandedShopSearchArea.classList.remove("hidden");
-          expandedShopSearchArea.classList.add("active");
-          const searchInput = expandedShopSearchArea.querySelector(
-            ".shop-search-input-expanded"
-          );
-          if (searchInput) {
-            searchInput.focus(); // 포커스 설정
-          }
+          expandedShopSearchArea
+            .querySelector(".shop-search-input-expanded")
+            ?.focus();
         } else if (mode === "location") {
           expandedAddressInputArea.classList.remove("hidden");
-          expandedAddressInputArea.classList.add("active");
-          const addressInput = expandedAddressInputArea.querySelector(
-            ".address-search-input"
-          );
-          if (addressInput) {
-            addressInput.focus(); // 포커스 설정
-          }
+          expandedAddressInputArea
+            .querySelector(".address-search-input")
+            ?.focus();
         }
       }
 
-      // 이벤트 리스너 연결
-      initialShopSearchBox.addEventListener("click", () => setMode("search"));
-      initialLocationSearchArea.addEventListener("click", () =>
+      initialShopSearchBox?.addEventListener("click", () => setMode("search"));
+      initialLocationSearchArea?.addEventListener("click", () =>
         setMode("location")
       );
-
-      closeSearchModeButton.addEventListener("click", () => setMode("initial"));
-      closeLocationModeButton.addEventListener("click", () =>
+      closeSearchModeButton?.addEventListener("click", () =>
         setMode("initial")
       );
+      closeLocationModeButton?.addEventListener("click", () =>
+        setMode("initial")
+      );
+
+      // 주소 자동완성 기능
+      const addressInput = document.querySelector(".address-search-input");
+      const suggestionList = document.querySelector(".address-suggestion-list");
+
+      let debounceTimer;
+      let selectedLat = null;
+      let selectedLon = null;
+
+      addressInput?.addEventListener("input", (e) => {
+        const keyword = e.target.value.trim();
+        clearTimeout(debounceTimer);
+
+        debounceTimer = setTimeout(() => {
+          if (keyword.length === 0) {
+            suggestionList.innerHTML = "";
+            suggestionList.style.display = "none";
+            return;
+          }
+
+          fetch(`/api/addresses?q=${encodeURIComponent(keyword)}`)
+            .then((res) => res.json())
+            .then((data) => {
+              suggestionList.innerHTML = "";
+              if (!Array.isArray(data)) return;
+
+              data.forEach((item) => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                li.addEventListener("click", () => {
+                  addressInput.value = item;
+                  suggestionList.innerHTML = "";
+                  suggestionList.style.display = "none";
+
+                  // 위경도 변환
+                  fetch(
+                    `/api/address-to-coord?address=${encodeURIComponent(item)}`
+                  )
+                    .then((res) => res.json())
+                    .then((pos) => {
+                      selectedLat = pos.lat;
+                      selectedLon = pos.lon;
+                      console.log("📍 선택된 좌표:", selectedLat, selectedLon);
+                      // 필요 시 hidden input에 저장하거나 전송 로직 추가
+                    });
+                });
+                suggestionList.appendChild(li);
+              });
+
+              suggestionList.style.display = "block";
+            });
+        }, 300);
+      });
+
+      // 외부 클릭 시 suggestion 닫기
+      document.addEventListener("click", (e) => {
+        if (!suggestionList.contains(e.target) && e.target !== addressInput) {
+          suggestionList.innerHTML = "";
+          suggestionList.style.display = "none";
+        }
+      });
+
+      // 검색 기능 열기
+
+      const shopSearchInput = document.querySelector(
+        ".shop-search-input-expanded"
+      );
+      const shopSuggestionList = document.querySelector(
+        ".shop-suggestion-list"
+      );
+
+      let shopDebounceTimer;
+
+      shopSearchInput?.addEventListener("input", (e) => {
+        const keyword = e.target.value.trim();
+        clearTimeout(shopDebounceTimer);
+
+        shopDebounceTimer = setTimeout(() => {
+          if (keyword.length === 0) {
+            shopSuggestionList.innerHTML = "";
+            shopSuggestionList.style.display = "none";
+            return;
+          }
+
+          // 🔽 API 호출: `/api/shops?q=검색어`
+          fetch(`/api/shops?q=${encodeURIComponent(keyword)}`)
+            .then((res) => res.json())
+            .then((shops) => {
+              shopSuggestionList.innerHTML = "";
+
+              if (!Array.isArray(shops) || shops.length === 0) {
+                shopSuggestionList.style.display = "none";
+                return;
+              }
+
+              shops.forEach((shop) => {
+                const li = document.createElement("li");
+                li.textContent = shop.name; // 예: shop = { id, name, address, ... }
+                li.addEventListener("click", () => {
+                  // 선택 시 input에 값 넣고 리스트 닫기
+                  shopSearchInput.value = shop.name;
+                  shopSuggestionList.innerHTML = "";
+                  shopSuggestionList.style.display = "none";
+
+                  // 🔽 선택한 미용실 페이지로 이동하거나 원하는 로직 실행
+                  // window.location.href = `/shop/${shop.id}`;
+                });
+                shopSuggestionList.appendChild(li);
+              });
+
+              shopSuggestionList.style.display = "block";
+            });
+        }, 300); // 디바운스 300ms
+      });
+
+      // 🔽 외부 클릭 시 자동완성 닫기
+      document.addEventListener("click", (e) => {
+        if (
+          !shopSuggestionList.contains(e.target) &&
+          e.target !== shopSearchInput
+        ) {
+          shopSuggestionList.innerHTML = "";
+          shopSuggestionList.style.display = "none";
+        }
+      });
     </script>
   </body>
 </html>

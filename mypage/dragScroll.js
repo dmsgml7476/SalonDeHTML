@@ -1,40 +1,71 @@
-export function enableDragScroll(target, { multiplier = 1.2 } = {}) {
-  console.log("✅ enableDragScroll 불림", target);
+export function enableDragScroll(
+  target,
+  { multiplier = 1.2, clickThreshold = 5 } = {}
+) {
   if (!target) return;
+
   let isDown = false;
   let startX = 0;
-  let scrollStart = 0;
+  let scrollX = 0;
+  let moved = false;
 
-  /* PC mouse */
+  /* ───────── PC mouse ───────── */
   target.addEventListener("mousedown", (e) => {
     isDown = true;
+    moved = false;
+    startX = e.pageX;
+    scrollX = target.scrollLeft;
     target.classList.add("dragging");
-    startX = e.pageX - target.offsetLeft;
-    scrollStart = target.scrollLeft;
+    document.body.style.userSelect = "none";
   });
-
-  ["mouseup", "mouseleave"].forEach((ev) =>
-    target.addEventListener(ev, () => {
-      isDown = false;
-      target.classList.remove("dragging");
-    })
-  );
 
   target.addEventListener("mousemove", (e) => {
     if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - target.offsetLeft;
-    const walk = (x - startX) * multiplier;
-    target.scrollLeft = scrollStart - walk;
+    const dx = e.pageX - startX;
+    if (Math.abs(dx) > clickThreshold) moved = true;
+
+    e.preventDefault(); // 기본 드래그 방지
+    target.scrollLeft = scrollX - dx * multiplier;
   });
 
-  /* Mobile touch */
+  /* mouseup / mouseleave */
+  ["mouseup", "mouseleave"].forEach((type) =>
+    target.addEventListener(type, (e) => {
+      if (!isDown) return;
+      isDown = false;
+      target.classList.remove("dragging");
+      document.body.style.userSelect = "";
+
+      /* ① 드래그였다면 다음 click 한 번 무력화 */
+      if (moved) {
+        const cancel = (ev) => {
+          ev.stopImmediatePropagation();
+          ev.preventDefault();
+          target.removeEventListener("click", cancel, true);
+        };
+        /* useCapture=true 로 한 번만 잡아서 취소 */
+        target.addEventListener("click", cancel, true);
+        return; // 끝
+      }
+
+      /* ② 클릭이었다면 여기서 수동 click 발행(선택) */
+      const clickEvt = new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        clientX: e.clientX,
+        clientY: e.clientY,
+      });
+      e.target.dispatchEvent(clickEvt);
+    })
+  );
+
+  /* ───────── Mobile touch ───────── */
   let touchStartX = 0;
   target.addEventListener(
     "touchstart",
     (e) => {
       touchStartX = e.touches[0].pageX;
-      scrollStart = target.scrollLeft;
+      scrollX = target.scrollLeft;
     },
     { passive: true }
   );
@@ -42,14 +73,14 @@ export function enableDragScroll(target, { multiplier = 1.2 } = {}) {
   target.addEventListener(
     "touchmove",
     (e) => {
-      const moveX = e.touches[0].pageX;
-      const walk = (moveX - touchStartX) * multiplier;
-      target.scrollLeft = scrollStart - walk;
+      const dx = e.touches[0].pageX - touchStartX;
+      target.scrollLeft = scrollX - dx * multiplier;
     },
     { passive: true }
   );
 }
 
+/* 자동 바인딩 */
 export function autoBindDragScroll(selector = "[data-drag-scroll]") {
   document.querySelectorAll(selector).forEach((el) => enableDragScroll(el));
 }

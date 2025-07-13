@@ -97,79 +97,41 @@ body {
 }
 
 /* 지도 부분 */
+
 .main-content-area {
-  margin-top: 30px; /* 마진 조절 */
   position: relative;
-  width: 100%; /* 반응형 */
-  height: 450px; /* 높이 조절 */
-  overflow: hidden;
-  border-radius: 15px; /* 모서리 둥글게 */
-  box-shadow: 0 4px 10px var(--box-shadow); /* 그림자 추가 */
-}
-
-.main-map {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%; /* 반응형 */
-  height: 100%; /* 반응형 */
-  background: #eee url("지도이미지.png") center/cover no-repeat; /* 이미지 경로 확인 */
-  z-index: 0;
-  opacity: 0; /* 초기에는 숨김 */
-  transition: opacity 0.4s ease; /* 서서히 나타나도록 */
-}
-
-.main-map.show {
-  opacity: 1;
-}
-
-/* 하나의 split-box가 화면 덮음 */
-.split-box {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  pointer-events: auto;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--dark-gray);
+  max-width: 1280px; /* 원본보다 커지지 않게 */
+  margin: 30px auto 0;
   overflow: hidden;
-  cursor: pointer; /* 클릭 가능 표시 */
+  border-radius: 15px;
+  box-shadow: 0 4px 10px var(--box-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* 좌우 가상 요소 */
-.split-box::before,
-.split-box::after {
-  content: "";
+.main-content-area .main-map {
   position: absolute;
-  top: 0;
-  width: 50%;
-  height: 100%;
-  background-color: white; /* 배경색 변경 */
-  transition: transform 0.7s ease;
-  z-index: 1;
+
+  width: 80%;
+  height: 80%;
+  background-color: gray;
+  z-index: -1; /* 이미지 위에 겹친다면 조절 */
 }
 
-.split-box::before {
-  left: 0;
+.main-content-area > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
-.split-box::after {
-  right: 0;
-}
-
-.split-box.open::before {
-  transform: translateX(-100%);
-}
-
-.split-box.open::after {
-  transform: translateX(100%);
+.main-content-area img.sizer {
+  width: 100%;
+  height: auto;
+  visibility: hidden; /* 화면엔 안 보이지만 높이는 차지 */
+  pointer-events: none;
 }
 
 /* 광고 배너 */
@@ -514,7 +476,7 @@ body {
   }
 
   .main-content-area {
-    height: 400px;
+    height: auto; /* 이미지가 알아서 비율 유지 */
   }
 
   .ad-banner-swiper {
@@ -604,12 +566,12 @@ body {
   }
 
   .main-content-area {
-    height: 300px;
     margin-top: 20px;
+    border-radius: 10px;
   }
 
-  .split-box {
-    font-size: 20px;
+  .main-content-area > img {
+    max-height: 300px;
   }
 
   .ad-banner-swiper {

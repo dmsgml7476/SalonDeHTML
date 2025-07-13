@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="myReview.css" />
+    <link rel="stylesheet" href="myReview copy.css" />
   </head>
   <body>
     <div class="my-page">
@@ -43,6 +43,7 @@
             <div class="my-review-area" id="reviewArea">
               <!-- 리뷰 박스 예시 (JavaScript로 동적으로 추가될 수 있습니다) -->
               <div class="review-box">
+                <div class="review-reply-unread"></div>
                 <img
                   src="https://cdn.pixabay.com/photo/2025/04/16/06/25/duck-9536937_1280.jpg"
                   alt="리뷰 메인 이미지 1"
@@ -70,129 +71,17 @@
                 data-rating="4"
                 data-date="2025.05.25"
                 data-hairstyle="레이어드 컷"
-              ></div>
+              >
+                <div class="review-reply-unread"></div>
+              </div>
 
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
+              <!-- html -->
 
-              <div
-                class="review-box"
-                data-rating="4"
-                data-date="2025.05.25"
-                data-hairstyle="레이어드 컷"
-              ></div>
+              <div class="review-box">
+                <div class="review-rating">★★★★★</div>
+                <div class="reservation-date">- 2025.05.25 -</div>
+                <div class="service">레이어드</div>
+              </div>
             </div>
 
             <!-- 변경부분 끝 -->
@@ -213,16 +102,19 @@
             <div class="modal-slider-wrapper">
               <div class="review-img-modal-slider" data-drag-scroll>
                 <div class="review-img-mbox">
-                  <img src="/image/리뷰 (1).png" alt="사진/혹은디자인" />
+                  <img src="" alt="사진/혹은디자인" />
                 </div>
                 <div class="review-img-mbox">
-                  <img src="/image/리뷰 (2).png" alt="사진/혹은디자인" />
+                  <img src="" alt="사진/혹은디자인" />
                 </div>
                 <div class="review-img-mbox">
-                  <img src="/image/리뷰 (3).png" alt="사진/혹은디자인" />
+                  <img src="" alt="사진/혹은디자인" />
                 </div>
                 <div class="review-img-mbox">
-                  <img src="/image/리뷰 (4).png" alt="사진/혹은디자인" />
+                  <img src="" alt="사진/혹은디자인" />
+                </div>
+                <div class="review-img-mbox">
+                  <img src="" alt="사진/혹은디자인" />
                 </div>
               </div>
             </div>
@@ -337,30 +229,6 @@
               currentImageIndex = 0; // 인덱스 초기화
             }
           });
-        });
-        // 이미지 자동 조정
-        const adjustImageFit = (img) => {
-          const { naturalWidth: w, naturalHeight: h } = img;
-          if (!w || !h) return;
-
-          // 기존 class 제거
-          img.classList.remove("portrait", "landscape");
-
-          if (w / h > 3 / 4) {
-            // 가로가 더 길다 → height 기준으로 맞춤
-            img.classList.add("portrait");
-          } else {
-            // 세로가 더 길다 → width 기준으로 맞춤
-            img.classList.add("landscape");
-          }
-        };
-
-        document.querySelectorAll(".review-img-mbox > img").forEach((img) => {
-          if (img.complete) {
-            adjustImageFit(img);
-          } else {
-            img.addEventListener("load", () => adjustImageFit(img));
-          }
         });
       });
 

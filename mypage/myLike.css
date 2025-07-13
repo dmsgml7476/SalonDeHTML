@@ -181,9 +181,10 @@
 
 .shop-list {
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto;
   gap: 16px;
   justify-content: flex-start;
+  width: max-content;
 }
 
 .shop-box {

@@ -96,7 +96,6 @@
 .my-review-area {
   display: flex;
   flex-wrap: wrap;
-  overflow-y: scroll;
   gap: 15px;
   justify-content: flex-start;
 }
@@ -112,6 +111,17 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
   height: auto; /* 💡 고정 height 제거 */
+}
+
+.review-reply-unread {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 15px;
+  height: 15px;
+  background-color: #007bff;
+  border-radius: 50%;
+  z-index: 10;
 }
 
 .review-box:hover {
@@ -133,6 +143,8 @@
 .review-box img.active {
   opacity: 1;
 }
+
+/* 이미지 없을때  */
 
 /* 모달 시작 */
 .modal {
@@ -207,38 +219,11 @@
   display: none;
 }
 
-/* 가로 세로에 맞게 이미지 조정 코드 */
 .review-img-mbox {
   flex: 0 0 auto;
   width: 150px;
-  aspect-ratio: 3 / 4;
   border: 1px solid;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background-color: #f0f0f0;
 }
-
-.review-img-mbox > img {
-  position: absolute;
-  object-fit: contain;
-}
-
-/* 가로가 짧은 이미지 (세로가 길다) */
-.review-img-mbox > img.landscape {
-  width: 100%;
-  height: auto;
-}
-
-/* 세로가 짧은 이미지 (가로가 길다) */
-.review-img-mbox > img.portrait {
-  height: 100%;
-  width: auto;
-}
-
-/* 가로 세로에 맞게 이미지 조정 코드 */
 
 .review-header-modal .close {
   font-size: 20px;
@@ -275,16 +260,6 @@
 }
 .rating {
   color: #ffb400;
-}
-
-/* 드래그 금지 */
-.dragging img {
-  pointer-events: none;
-}
-.review-img-modal-slider,
-.review-img-modal-slider * {
-  user-select: none;
-  -webkit-user-drag: none;
 }
 
 /* 댓글(답글) */
